@@ -1,7 +1,9 @@
 # レポート課題(topology)
 ## 課題内容
+
 - ホストの接続関係を表示するようtopologyを改造する。
 - パケットを出したホストのIPアドレスを楕円で表示する。
+- 
 ## tremaのダウングレード
 [handai-trema/syllabusのissue #18](https://github.com/handai-trema/syllabus/issues/18)にあるように最新版のTremaでは正しく動作しないため、Tremaをバージョン0.8.0にダウングレードした。
 ダウングレードはGemfileを下記のように変更したのち、`bundle install --binstubs`を実行することにより行う。
@@ -12,6 +14,7 @@
 ---
 > gem 'trema', '0.8.0'
 ```
+
 ## ホストの接続関係を表示するようtopologyを改造する
 topology_controller.rbにおいて、ホストの接続関係をlldp以外のパケットから取得して、Topologyクラスのインスタンス変数hostsに格納している。
 これをgraphviz.rbから参照できるようにtopology.rbにおいて、以下のようにメソッドattr_readerを用いてインスタンス変数hostsのアクセサメソッドを定義する。
@@ -19,6 +22,7 @@ topology_controller.rbにおいて、ホストの接続関係をlldp以外のパ
 ```
 attr_reader :hosts
 ```
+
 ## パケットを出したホストのIPアドレスを楕円で表示する
 画像の出力を行っているlib/view/graphviz.rbのメソッドupdateに以下のように命令を追記し、パケットを出したホストのIPアドレスを楕円で表示する。
 ここでは、ノードの追加とリンクの追加をひとまとめに行っている。
@@ -33,6 +37,7 @@ attr_reader :hosts
 > 	  gviz.add_edges tmp[each], nodes[dpid]
 > 	end
 ```
+
 ## 動作確認
 以下のようにtopology_controller.rbを実行する。
 
@@ -45,7 +50,7 @@ attr_reader :hosts
 ```
 ./bin/trema send_packets -s host1 -d host2
 ./bin/trema send_packets -s host2 -d host3
-./bin/trema send_packets -s host3 -d host2
+./bin/trema send_packets -s host3 -d host1
 ```
 
 数分待つと以下のような画像が得られ、各スイッチに接続するホストが表示されており、プログラムが正しく動作していることがわかる。
