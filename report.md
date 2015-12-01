@@ -55,4 +55,4 @@ attr_reader :hosts
 
 数分待つと以下のような画像が得られ、各スイッチに接続するホストが表示されており、プログラムが正しく動作していることがわかる。
 
-![topology](./topology.png)
+![topology](./tpg.png)
