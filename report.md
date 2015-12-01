@@ -3,7 +3,7 @@
 
 - ホストの接続関係を表示するようtopologyを改造する。
 - パケットを出したホストのIPアドレスを楕円で表示する。
-- 
+
 ## tremaのダウングレード
 [handai-trema/syllabusのissue #18](https://github.com/handai-trema/syllabus/issues/18)にあるように最新版のTremaでは正しく動作しないため、Tremaをバージョン0.8.0にダウングレードした。
 ダウングレードはGemfileを下記のように変更したのち、`bundle install --binstubs`を実行することにより行う。
