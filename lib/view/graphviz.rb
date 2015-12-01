@@ -17,6 +17,13 @@ module View
           next unless nodes[each.dpid_a] && nodes[each.dpid_b]
           gviz.add_edges nodes[each.dpid_a], nodes[each.dpid_b]
         end
+	# hosts
+	hosts = topology.hosts.each_with_object({}) do |each, tmp|
+	  tmp[each] = gviz.add_nodes(each[1].to_s, shape: 'ellipse')
+	  dpid = each[2]
+	  next unless nodes[dpid]
+	  gviz.add_edges tmp[each], nodes[dpid]
+	end
         gviz.output png: @output
       end
     end
